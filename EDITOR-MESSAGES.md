@@ -1,14 +1,14 @@
 # Copy-paste messages for the team
 
 Send as-is. Each one is self-contained and links to the brief.
-Replace `<LINK>` with the brief URL once it's live.
+Replace https://paulboraniangolf.github.io/benchmark-keynote-brief/ with the brief URL once it's live.
 
 ---
 
 ## → CEDRICK (sequence lead + sound)
 
 > Cedrick — full brief with the timeline, my notes on every beat, and all the
-> motion graphics is here: `<LINK>`
+> motion graphics is here: https://paulboraniangolf.github.io/benchmark-keynote-brief/
 >
 > **Due Monday evening.** You're the sequence owner, so you're the spine of this.
 >
@@ -39,7 +39,7 @@ Replace `<LINK>` with the brief URL once it's live.
 
 ## → LUIGI (BMP / Range / Atlas)
 
-> Luigi — full brief with the timeline and every graphic is here: `<LINK>`
+> Luigi — full brief with the timeline and every graphic is here: https://paulboraniangolf.github.io/benchmark-keynote-brief/
 >
 > **Due Monday evening.** You've got the technical heart of the film.
 >
@@ -75,7 +75,7 @@ Replace `<LINK>` with the brief URL once it's live.
 
 ## → MAE (On Course / Lessons / Social)
 
-> Mae — full brief with the timeline and all the graphics is here: `<LINK>`
+> Mae — full brief with the timeline and all the graphics is here: https://paulboraniangolf.github.io/benchmark-keynote-brief/
 >
 > **Due Monday evening.** You've got the back third, which is where it all
 > comes together.
@@ -114,7 +114,7 @@ Replace `<LINK>` with the brief URL once it's live.
 > of the LED wall are visible, the right side of frame is about 30% darker than
 > the left, and there are a few stuck red pixels on the wall.
 >
-> There's a full look-dev set in the brief (`<LINK>`) — five AI-rendered
+> There's a full look-dev set in the brief (https://paulboraniangolf.github.io/benchmark-keynote-brief/) — five AI-rendered
 > treatments showing what the fixed stage looks like, with measurements of
 > every problem. The recommended one combines haze, a low floor rake light and
 > two vertical tube lights in the corners.
