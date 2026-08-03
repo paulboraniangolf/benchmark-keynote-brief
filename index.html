@@ -60,7 +60,7 @@ h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--fain
 .scrubhint{font-size:11.5px;color:var(--faint)}
 .scrubstrip{display:flex;gap:3px;border-radius:8px;overflow:hidden}
 .scrubstrip a{position:relative;flex:1 1 0;min-width:0;display:block;line-height:0;overflow:hidden;background:#000;transition:flex-grow .25s ease}
-.scrubstrip img{width:100%;height:76px;object-fit:cover;display:block;opacity:.62;transition:opacity .2s ease,transform .3s ease}
+.scrubstrip img{width:100%;height:76px;object-fit:cover;display:block;opacity:.88;transition:opacity .2s ease,transform .3s ease}
 .scrubstrip a:hover img{opacity:1;transform:scale(1.06)}
 .scrubstrip a:hover{flex-grow:1.5}
 .scrubstrip .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 6px 4px;
@@ -81,8 +81,11 @@ h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--fain
 .loom .lm{padding:9px 12px 11px;display:flex;align-items:center;gap:8px}
 .loom .lm .dot{width:6px;height:6px;border-radius:50%;background:var(--ced);flex:none}
 .loom .lm span{font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.02em}
-.thumbwrap{border-radius:11px;overflow:hidden;border:1px solid var(--line)}
+.thumbwrap{border-radius:11px;overflow:hidden;border:1px solid var(--line);position:relative;max-width:620px}
 .thumbwrap img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.thumbwrap .tnote{position:absolute;left:0;right:0;bottom:0;padding:16px 12px 7px;
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+  font-size:10.5px;color:rgba(255,255,255,.62);letter-spacing:.03em}
 
 /* ---------- timeline ---------- */
 .tl{display:flex;flex-direction:column;gap:14px}
@@ -486,7 +489,7 @@ document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
   const c = cvar[s.owner] || 'var(--dim)';
   const blk = (lbl, inner) => `<div class="blk"><div class="lbl">${lbl}</div>${inner}</div>`;
   let b = '';
-  if (s.thumb) b += blk('In the cut right now', `<div class="thumbwrap"><img src="assets/tl/${s.thumb}.jpg" alt="Frame from ${esc(s.title)}" loading="lazy"></div>`);
+  if (s.thumb) b += blk('In the cut right now', `<div class="thumbwrap"><img src="assets/tl/${s.thumb}.jpg" alt="Frame from ${esc(s.title)}" loading="lazy"><span class="tnote">Frame from the current cut · brightened for legibility</span></div>`);
   if (s.vo)   b += blk('Voice over', `<div class="vo">${s.vo.map(v=>`<p>${esc(v)}</p>`).join('')}</div>`);
   if (s.looms) b += blk('Paul saying it — from the Loom', `<div class="looms">${s.looms.map(l=>
       `<div class="loom"><video src="assets/loom/${l.id}.mp4" controls preload="none" playsinline></video>
