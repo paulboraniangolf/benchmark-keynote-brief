@@ -194,7 +194,7 @@ footer{padding:52px 0 74px;color:var(--faint);font-size:12.5px;line-height:1.7}
     variables, not baked pixels. Every one also exports as a <strong style="color:#fff">ProRes 4444 alpha overlay at 4K</strong>,
     so it drops straight onto V2 in Premiere over a cut. Hover any card to play.
   </p>
-  <div class="packs" id="packs"></div>
+  <div class="packs" id="packGrid"></div>
   <div class="card" style="margin-top:22px">
     <h4>How they were made — and why that matters for you</h4>
     <p>These aren't stock transition packs. Each one is a small program: the Benchmark wordmark is real
@@ -431,7 +431,7 @@ document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
   </details>`;
 }).join('');
 
-document.getElementById('packs').innerHTML = window.PACKS.map(p => {
+document.getElementById('packGrid').innerHTML = window.PACKS.map(p => {
   const c = cvar[p.who] || 'var(--dim)';
   const who = p.who==='all' ? 'Everyone' : O[p.who].name;
   return `<div class="pack">
