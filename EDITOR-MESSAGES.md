@@ -1,7 +1,7 @@
 # Copy-paste messages for the team
 
 Send as-is. Each one is self-contained and links to the brief.
-Replace https://paulboraniangolf.github.io/benchmark-keynote-brief/ with the brief URL once it's live.
+Live brief: https://paulboraniangolf.github.io/benchmark-keynote-brief/
 
 ---
 
