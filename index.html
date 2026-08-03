@@ -52,6 +52,38 @@ h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--fain
 .owner li{font-size:13.5px;color:var(--dim);padding-left:16px;position:relative;line-height:1.5}
 .owner li:before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--c);opacity:.8}
 
+/* ---------- scrubber ---------- */
+.scrub{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px 16px;margin-bottom:22px}
+.scrubhead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.scrubhead span{font-size:13px;color:var(--dim)}
+.scrubhead b{color:#fff;font-weight:700}
+.scrubhint{font-size:11.5px;color:var(--faint)}
+.scrubstrip{display:flex;gap:3px;border-radius:8px;overflow:hidden}
+.scrubstrip a{position:relative;flex:1 1 0;min-width:0;display:block;line-height:0;overflow:hidden;background:#000;transition:flex-grow .25s ease}
+.scrubstrip img{width:100%;height:76px;object-fit:cover;display:block;opacity:.62;transition:opacity .2s ease,transform .3s ease}
+.scrubstrip a:hover img{opacity:1;transform:scale(1.06)}
+.scrubstrip a:hover{flex-grow:1.5}
+.scrubstrip .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 6px 4px;
+  background:linear-gradient(to top,rgba(0,0,0,.92),transparent);
+  font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;line-height:1.15;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scrubstrip .tcx{position:absolute;top:5px;left:6px;font-size:9px;font-weight:700;color:rgba(255,255,255,.72);
+  background:rgba(0,0,0,.5);padding:2px 5px;border-radius:4px}
+.scrubaxis{position:relative;height:16px;margin-top:7px}
+.scrubaxis i{position:absolute;top:0;width:1px;height:5px;background:rgba(255,255,255,.2)}
+.scrubaxis b{position:absolute;top:7px;transform:translateX(-50%);font-size:9.5px;color:var(--faint);font-weight:600}
+@media(max-width:680px){.scrubstrip .cap{display:none}.scrubstrip img{height:56px}}
+
+/* ---------- loom clips ---------- */
+.looms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.loom{background:rgba(122,200,255,.05);border:1px solid rgba(122,200,255,.2);border-radius:11px;overflow:hidden}
+.loom video{width:100%;aspect-ratio:16/9;display:block;background:#000;cursor:pointer}
+.loom .lm{padding:9px 12px 11px;display:flex;align-items:center;gap:8px}
+.loom .lm .dot{width:6px;height:6px;border-radius:50%;background:var(--ced);flex:none}
+.loom .lm span{font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.02em}
+.thumbwrap{border-radius:11px;overflow:hidden;border:1px solid var(--line)}
+.thumbwrap img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+
 /* ---------- timeline ---------- */
 .tl{display:flex;flex-direction:column;gap:14px}
 .beat{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
@@ -189,6 +221,16 @@ footer{padding:52px 0 74px;color:var(--faint);font-size:12.5px;line-height:1.7}
 <section id="timeline"><div class="wrap">
   <h2>The timeline</h2>
   <div class="h2sub">Every beat of the current cut, with Paul's notes</div>
+
+  <div class="scrub">
+    <div class="scrubhead">
+      <span>The current cut — <b>2:51.8</b></span>
+      <span class="scrubhint">Click any frame to jump to that beat</span>
+    </div>
+    <div class="scrubstrip" id="scrubstrip"></div>
+    <div class="scrubaxis" id="scrubaxis"></div>
+  </div>
+
   <div class="tl" id="tl"></div>
 </div></section>
 
@@ -335,6 +377,10 @@ vignette: subtle</div>
          a few frames either way, so impacts can be moved onto the beat grid without breaking the visuals.</p>
     </div>
   </div>
+  <div style="margin-top:20px">
+    <div class="lbl" style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:10px">Paul on sound and delivery — from the Loom</div>
+    <div class="looms" id="extraLooms"></div>
+  </div>
 </div></section>
 
 <section id="delivery"><div class="wrap">
@@ -422,19 +468,37 @@ vignette: subtle</div>
 const O = window.OWNERS, cvar = {cedrick:'var(--ced)',luigi:'var(--lui)',mae:'var(--mae)',all:'var(--dim)'};
 const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 
+// ---- visual scrubber over the real cut ----
+const fmt = t => Math.floor(t/60) + ':' + String(Math.round(t%60)).padStart(2,'0');
+const byId = Object.fromEntries(window.SECTIONS.map(s=>[s.id,s]));
+document.getElementById('scrubstrip').innerHTML = window.CUT_MARKS.map(m => {
+  const sec = byId[m.id];
+  return `<a href="#b-${m.id}" title="${esc(m.label)} — ${fmt(m.t)}">
+    <img src="assets/tl/${sec && sec.thumb ? sec.thumb : 's01'}.jpg" alt="${esc(m.label)}" loading="lazy">
+    <span class="tcx">${fmt(m.t)}</span><span class="cap">${esc(m.label)}</span></a>`;
+}).join('');
+document.getElementById('scrubaxis').innerHTML = [0,30,60,90,120,150,171.8].map(t => {
+  const pct = (t / window.CUT_LENGTH) * 100;
+  return `<i style="left:${pct}%"></i><b style="left:${pct}%">${fmt(t)}</b>`;
+}).join('');
+
 document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
   const c = cvar[s.owner] || 'var(--dim)';
   const blk = (lbl, inner) => `<div class="blk"><div class="lbl">${lbl}</div>${inner}</div>`;
   let b = '';
+  if (s.thumb) b += blk('In the cut right now', `<div class="thumbwrap"><img src="assets/tl/${s.thumb}.jpg" alt="Frame from ${esc(s.title)}" loading="lazy"></div>`);
   if (s.vo)   b += blk('Voice over', `<div class="vo">${s.vo.map(v=>`<p>${esc(v)}</p>`).join('')}</div>`);
-  if (s.paul) b += blk("Paul's notes", `<div class="quote">${s.paul.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`);
+  if (s.looms) b += blk('Paul saying it — from the Loom', `<div class="looms">${s.looms.map(l=>
+      `<div class="loom"><video src="assets/loom/${l.id}.mp4" controls preload="none" playsinline></video>
+       <div class="lm"><span class="dot"></span><span>${esc(l.src)}</span></div></div>`).join('')}</div>`);
+  if (s.paul) b += blk("Transcribed", `<div class="quote">${s.paul.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`);
   if (s.now)  b += blk('Where it is now', `<div class="now">${esc(s.now)}</div>`);
   if (s.todo) b += blk('To do', `<ul class="todo">${s.todo.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`);
   if (s.assets) b += blk('Assets ready', `<div class="assets">${s.assets.map(a=>
       `<div class="asset"><span class="tagk k-${a.kind}">${a.kind==='new'?'new tonight':a.kind}</span><span>${esc(a.label)}</span></div>`).join('')}</div>`);
   if (s.gap)  b += `<div class="flag f-gap"><b>BLOCKER</b><span>${esc(s.gap)}</span></div>`;
   if (s.gate) b += `<div class="flag f-gate"><b>CLAIM</b><span>${esc(s.gate)}</span></div>`;
-  return `<details class="beat"${i<3?' open':''}>
+  return `<details class="beat" id="b-${s.id}"${i<3?' open':''}>
     <summary>
       <div class="num">${s.n}</div>
       <div><div class="bt">${esc(s.title)}</div><div class="bmeta">${esc(s.range)}</div></div>
@@ -443,6 +507,10 @@ document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
     <div class="body">${b}</div>
   </details>`;
 }).join('');
+
+document.getElementById('extraLooms').innerHTML = window.EXTRA_LOOMS.map(l =>
+  `<div class="loom"><video src="assets/loom/${l.id}.mp4" controls preload="none" playsinline></video>
+   <div class="lm"><span class="dot"></span><span>${esc(l.title)} · ${esc(l.src)}</span></div></div>`).join('');
 
 document.getElementById('packGrid').innerHTML = window.PACKS.map(p => {
   const c = cvar[p.who] || 'var(--dim)';

@@ -10,7 +10,7 @@ window.OWNERS = {
 
 window.SECTIONS = [
   {
-    id: "cold-open", n: "00", title: "Cold Open", tc: "pre-roll", range: "15–20s before VO",
+    id: "cold-open", thumb: "s01", looms: [{ id: "L-coldopen", src: "Motion Graphics Review · 0:07" }], n: "00", title: "Cold Open", tc: "pre-roll", range: "15–20s before VO",
     owner: "cedrick",
     vo: null,
     paul: [
@@ -28,7 +28,7 @@ window.SECTIONS = [
     ],
   },
   {
-    id: "belief", n: "01", title: "The Belief", tc: "0:00", range: "0:00 – 0:16.8",
+    id: "belief", thumb: "s01", looms: [{ id: "L-swings", src: "Motion Graphics Review · 0:31" }], n: "01", title: "The Belief", tc: "0:00", range: "0:00 – 0:16.8",
     owner: "cedrick",
     vo: [
       "We started Benchmark Golf with a belief.",
@@ -50,7 +50,7 @@ window.SECTIONS = [
     gate: "The swings figure is a CLAIM. The graphic ships with the number as a variable — confirm the real figure with Paul before it goes to master.",
   },
   {
-    id: "four-places", n: "02", title: "Four Places", tc: "0:16.8", range: "0:16.8 – 0:30.3",
+    id: "four-places", thumb: "s02", looms: [{ id: "L-places", src: "Motion Graphics Review · 1:09" }, { id: "L-places2", src: "Epic Launch Script · 0:18" }], n: "02", title: "Four Places", tc: "0:16.8", range: "0:16.8 – 0:30.3",
     owner: "cedrick",
     vo: [
       "But golf isn't played in one place.",
@@ -71,7 +71,7 @@ window.SECTIONS = [
     gap: "There is NO living-room / at-home footage anywhere in the project libraries. This has to be shot or sourced — it is the one hard blocker in this section.",
   },
   {
-    id: "expansion", n: "03", title: "The Expansion — make it epic", tc: "0:30.3", range: "0:30.3 – 0:46.0",
+    id: "expansion", thumb: "s03", looms: [{ id: "L-epic", src: "Epic Launch Script · 0:48" }, { id: "L-logo", src: "Epic Launch Script · 0:57" }], n: "03", title: "The Expansion — make it epic", tc: "0:30.3", range: "0:30.3 – 0:46.0",
     owner: "cedrick",
     vo: [
       "So for the past two years, we've been building towards this day.",
@@ -94,7 +94,7 @@ window.SECTIONS = [
     ],
   },
   {
-    id: "bmp", n: "04", title: "The BMP Model", tc: "0:46.0", range: "0:46.0 – 1:07.3",
+    id: "bmp", thumb: "s04", looms: [{ id: "L-bmp1", src: "Epic Launch Script · 1:24" }, { id: "L-bmp2", src: "Epic Launch Script · 1:55" }], n: "04", title: "The BMP Model", tc: "0:46.0", range: "0:46.0 – 1:07.3",
     owner: "luigi",
     vo: [
       "Swing analysis used to mean a studio, a coach, a launch monitor.",
@@ -117,7 +117,7 @@ window.SECTIONS = [
     gate: "'Millimeter precision' is an unconfirmed claim in the claims list. Do not build a graphic that asserts a specific tolerance number.",
   },
   {
-    id: "rollcall", n: "05", title: "Roll Call", tc: "1:07.3", range: "1:07.3 – 1:13.9",
+    id: "rollcall", thumb: "s05", looms: [{ id: "L-rollcall", src: "Epic Launch Script · 2:33" }], n: "05", title: "Roll Call", tc: "1:07.3", range: "1:07.3 – 1:13.9",
     owner: "luigi",
     vo: ["At the range, at the course, at home, and with lessons."],
     paul: [
@@ -129,7 +129,7 @@ window.SECTIONS = [
     assets: [{ label: "roll-call — same build as section 02, retimed to the four spoken phrases. RENDERED", kind: "built" }],
   },
   {
-    id: "range", n: "06", title: "Benchmark Range", tc: "1:13.9", range: "1:13.9 – 1:44.6",
+    id: "range", thumb: "s06", looms: [{ id: "L-rangetrans", src: "Epic Launch Script · 2:52" }, { id: "L-range", src: "Epic Launch Script · 3:23" }], n: "06", title: "Benchmark Range", tc: "1:13.9", range: "1:13.9 – 1:44.6",
     owner: "luigi",
     vo: [
       "The range is where every golfer starts their journey.",
@@ -157,7 +157,7 @@ window.SECTIONS = [
     ],
   },
   {
-    id: "success", n: "07", title: "Success + the 30 courses", tc: "1:44.6", range: "1:44.6 – 1:54.6",
+    id: "success", thumb: "s07", looms: [{ id: "L-mosaics", src: "Epic Launch Script · 4:04" }, { id: "L-30courses", src: "Epic Launch Script · 4:49" }], n: "07", title: "Success + the 30 courses", tc: "1:44.6", range: "1:44.6 – 1:54.6",
     owner: "luigi",
     vo: [
       "We've unlocked golf in almost a million homes on every continent,",
@@ -182,7 +182,7 @@ window.SECTIONS = [
     gate: "'Almost a million homes on every continent' and 'fastest growing consumer golf product' are both unconfirmed superlatives in the claims list.",
   },
   {
-    id: "atlas", n: "08", title: "Benchmark Atlas", tc: "1:54.6", range: "1:54.6 – 2:08.6",
+    id: "atlas", thumb: "s08", looms: [{ id: "L-atlas", src: "Epic Launch Script · 4:56" }, { id: "L-teaser", src: "Epic Launch Script · 5:54" }], n: "08", title: "Benchmark Atlas", tc: "1:54.6", range: "1:54.6 – 2:08.6",
     owner: "luigi",
     vo: [
       "Over the last year, we used satellites to scan every course in the world with precision.",
@@ -206,7 +206,7 @@ window.SECTIONS = [
     gate: "CRITICAL: 'scan every course in the world' is the highest-exposure claim in the film — Atlas was US-only as of Jul 27. The Atlas graphic is deliberately built to stay on North America and never depicts a real named course. Do not add worldwide course markers.",
   },
   {
-    id: "oncourse", n: "09", title: "On Course + the Caddy", tc: "2:08.6", range: "2:08.6 – 2:25.1",
+    id: "oncourse", thumb: "s09", looms: [{ id: "L-atlasbmp", src: "Epic Launch Script · 6:14" }], n: "09", title: "On Course + the Caddy", tc: "2:08.6", range: "2:08.6 – 2:25.1",
     owner: "mae",
     vo: [
       "On the course, we applied our Atlas and BMP models,",
@@ -228,7 +228,7 @@ window.SECTIONS = [
     gate: "STANDING ORDER: the caddy claims body and shape knowledge only. No carry distance, no club yardage, no 'how far you hit it' — it contradicts 'we don't read the ball'.",
   },
   {
-    id: "lessons", n: "10", title: "Lessons", tc: "2:25.1", range: "2:25.1 – 2:32.3",
+    id: "lessons", thumb: "s10", looms: [{ id: "L-lessons", src: "Epic Launch Script · 6:54" }], n: "10", title: "Lessons", tc: "2:25.1", range: "2:25.1 – 2:32.3",
     owner: "mae",
     vo: ["It combines every swing, round, and session recorded to give you relevant interactive lessons."],
     paul: [
@@ -243,7 +243,7 @@ window.SECTIONS = [
     assets: [{ label: "glass-pack — six drop-in glass elements; export any one alone via the only variable. RENDERED", kind: "built" }],
   },
   {
-    id: "social", n: "11", title: "Benchmark Social", tc: "2:32.3", range: "2:32.3 – 2:46.5",
+    id: "social", thumb: "s11", looms: [{ id: "L-social", src: "Epic Launch Script · 7:15" }], n: "11", title: "Benchmark Social", tc: "2:32.3", range: "2:32.3 – 2:46.5",
     owner: "mae",
     vo: [
       "Our features make capturing videos and rounds seamless for every moment in golf.",
@@ -263,7 +263,7 @@ window.SECTIONS = [
     assets: [{ label: "Globe engine from atlas is reusable for a populated social globe with connection lines", kind: "built" }],
   },
   {
-    id: "close", n: "12", title: "The Close — epic", tc: "2:46.5", range: "2:46.5 – 2:51.8",
+    id: "close", thumb: "s12", looms: [{ id: "L-close", src: "Epic Launch Script · 7:44" }], n: "12", title: "The Close — epic", tc: "2:46.5", range: "2:46.5 – 2:51.8",
     owner: "cedrick",
     vo: ["This is the breakthrough moment where golf extends into the digital world."],
     paul: [
@@ -302,4 +302,29 @@ window.PACKS = [
   { id: "flare", name: "Floodlight", dur: "1.6s", use: "A bloom grows, whites out with an anamorphic streak, next scene lands backlit.", who: "cedrick", tag: "Utility" },
   { id: "liquid-glass", name: "Liquid Glass", dur: "10.0s", use: "The glass family — stat card, lower third, phone UI frame. Real translucency and moving speculars. Paul: 'always super productive.'", who: "all", tag: "Overlay" },
   { id: "bmp-popout", name: "BMP Pop-Out", dur: "8.0s", use: "Glass analysis panel ejecting from the phone. NOTE: superseded by the rebuilt bmp-swing — this version is the one Paul flagged as inaccurate.", who: "luigi", tag: "Superseded" },
+];
+
+// Cross-cutting Loom moments that aren't tied to one beat
+window.EXTRA_LOOMS = [
+  { id: "L-sound", title: "Sound design", src: "Epic Launch Script · 7:57",
+    note: "Ambient at moments, no cringy hype, and each vignette getting its own sound world." },
+  { id: "L-4k",    title: "4K delivery",  src: "Epic Launch Script · 8:28",
+    note: "Everything conforms to 4K — plan for it rather than retrofitting." },
+];
+
+// Visual timeline of the current cut (BENCHMARK-KEYNOTE-HANDOFF.mp4, 171.8s)
+window.CUT_LENGTH = 171.8;
+window.CUT_MARKS = [
+  { id: "belief",      t: 0,     label: "Belief" },
+  { id: "four-places", t: 16.8,  label: "Four places" },
+  { id: "expansion",   t: 30.3,  label: "Expansion" },
+  { id: "bmp",         t: 46.0,  label: "BMP" },
+  { id: "rollcall",    t: 67.3,  label: "Roll call" },
+  { id: "range",       t: 73.9,  label: "Range" },
+  { id: "success",     t: 104.6, label: "Success" },
+  { id: "atlas",       t: 114.6, label: "Atlas" },
+  { id: "oncourse",    t: 128.6, label: "On Course" },
+  { id: "lessons",     t: 145.1, label: "Lessons" },
+  { id: "social",      t: 152.3, label: "Social" },
+  { id: "close",       t: 166.5, label: "Close" },
 ];
