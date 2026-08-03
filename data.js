@@ -46,7 +46,7 @@ window.SECTIONS = [
       "Drop the swings-analyzed liquid-glass stat graphic at 0:13.0, full screen.",
       "Time the number's settle to land before 'every single month' finishes at 0:16.8.",
     ],
-    assets: [{ label: "stat-swings — full-screen liquid glass count-up, number is a variable", kind: "new" }],
+    assets: [{ label: "stat-swings — full-screen liquid glass count-up, number is a variable. RENDERED: preview + 4K alpha", kind: "built" }],
     gate: "The swings figure is a CLAIM. The graphic ships with the number as a variable — confirm the real figure with Paul before it goes to master.",
   },
   {
@@ -67,7 +67,7 @@ window.SECTIONS = [
       "Cut a clip for each named place as it is spoken: course, range, living room, mind.",
       "Then bring all of them on screen together for 'It was about all of them.'",
     ],
-    assets: [{ label: "roll-call — four live panels arriving one at a time, then holding together", kind: "new" }],
+    assets: [{ label: "roll-call — four live panels arriving one at a time, then holding together. RENDERED: preview + 4K alpha", kind: "built" }],
     gap: "There is NO living-room / at-home footage anywhere in the project libraries. This has to be shot or sourced — it is the one hard blocker in this section.",
   },
   {
@@ -113,7 +113,7 @@ window.SECTIONS = [
       "Show the real product overlay language, not invented sports graphics.",
       "Then the essential beat: his real body resolving INTO a 3D pose skeleton.",
     ],
-    assets: [{ label: "bmp-swing — rebuilt against the real app overlay: green swing plane, red/amber heat column, amber club-path arc, red→yellow→green reticle, then body → 3D pose", kind: "new" }],
+    assets: [{ label: "bmp-swing — rebuilt against the real app overlay: green swing plane, red/amber heat column, amber club-path arc, red→yellow→green reticle, then body → 3D pose. RENDERED: preview + 4K alpha", kind: "built" }],
     gate: "'Millimeter precision' is an unconfirmed claim in the claims list. Do not build a graphic that asserts a specific tolerance number.",
   },
   {
@@ -126,7 +126,7 @@ window.SECTIONS = [
     ],
     now: "Spoken over the bare wall. The four pillars are announced but not established visually.",
     todo: ["Establish all four pillars in 6.6s so the rest of the film pays them off in order."],
-    assets: [{ label: "roll-call — same build as section 02, retimed to the four spoken phrases", kind: "new" }],
+    assets: [{ label: "roll-call — same build as section 02, retimed to the four spoken phrases. RENDERED", kind: "built" }],
   },
   {
     id: "range", n: "06", title: "Benchmark Range", tc: "1:13.9", range: "1:13.9 – 1:44.6",
@@ -177,7 +177,7 @@ window.SECTIONS = [
     ],
     assets: [
       { label: "mosaic + two alternate tile mixes — bento wall of graded footage", kind: "built" },
-      { label: "thirty-courses — 30 counted dots, then the scan multiplies them", kind: "new" },
+      { label: "thirty-courses — 30 counted dots, then the scan multiplies them. RENDERED: preview + 4K alpha", kind: "built" },
     ],
     gate: "'Almost a million homes on every continent' and 'fastest growing consumer golf product' are both unconfirmed superlatives in the claims list.",
   },
@@ -201,7 +201,7 @@ window.SECTIONS = [
     ],
     assets: [
       { label: "atlas — globe, orbiting satellites, scan wedges, dive, and a vector hole that traces itself then plunges to the pin", kind: "built" },
-      { label: "thirty-courses — includes the read-the-ground labels beat", kind: "new" },
+      { label: "thirty-courses — includes the read-the-ground labels beat. RENDERED", kind: "built" },
     ],
     gate: "CRITICAL: 'scan every course in the world' is the highest-exposure claim in the film — Atlas was US-only as of Jul 27. The Atlas graphic is deliberately built to stay on North America and never depicts a real named course. Do not add worldwide course markers.",
   },
@@ -224,7 +224,7 @@ window.SECTIONS = [
       "Two halves, told cleanly: Atlas knows the course; BMP knows your swing. Then they combine.",
       "Build from the real On Course UI — the screen recording is the reference.",
     ],
-    assets: [{ label: "oncourse-caddy — hole view drawn in the real product language (green contour, dashed centreline, yardage HUD, distance pills) resolving into a caddy recommendation card", kind: "new" }],
+    assets: [{ label: "oncourse-caddy — hole view drawn in the real product language (green contour, dashed centreline, yardage HUD, distance pills) resolving into a caddy recommendation card. RENDERED: preview + 4K alpha", kind: "built" }],
     gate: "STANDING ORDER: the caddy claims body and shape knowledge only. No carry distance, no club yardage, no 'how far you hit it' — it contradicts 'we don't read the ball'.",
   },
   {
@@ -240,7 +240,7 @@ window.SECTIONS = [
       "Show the cross-mode idea: range + sim + course feeding one lesson.",
       "Overlay shot recommendation / fairway-hit graphics onto real course content.",
     ],
-    assets: [{ label: "liquid-glass pack — stat card, chip and frame elements for insight callouts", kind: "new" }],
+    assets: [{ label: "glass-pack — six drop-in glass elements; export any one alone via the only variable. RENDERED", kind: "built" }],
   },
   {
     id: "social", n: "11", title: "Benchmark Social", tc: "2:32.3", range: "2:32.3 – 2:46.5",
