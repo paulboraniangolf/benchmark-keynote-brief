@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Benchmark Keynote — Production Brief</title>
+<meta name="description" content="Team brief for the Benchmark Golf keynote. Timeline, assignments, motion graphics, colour and sound. Due Monday evening." />
+<meta property="og:title" content="Benchmark Keynote — Production Brief" />
+<meta property="og:description" content="Timeline, assignments, motion graphics, colour and sound. Due Monday evening." />
+<style>
+@font-face{font-family:Manrope;src:url("assets/manrope-var.woff2") format("woff2");font-weight:200 800;font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0c; --panel:#101014; --line:rgba(255,255,255,.09);
+  --ink:#fff; --dim:#9a9aa4; --faint:#63636d;
+  --ced:#7ac8ff; --lui:#ffb37a; --mae:#9ee8a8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+a{color:inherit}
+
+/* ---------- hero ---------- */
+header.hero{padding:74px 0 44px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);font-weight:600}
+h1{font-size:clamp(34px,5.4vw,60px);font-weight:800;letter-spacing:-.025em;line-height:1.02;margin:16px 0 0}
+h1 .lt{font-weight:200;color:var(--dim)}
+.lede{color:var(--dim);max-width:730px;margin-top:18px;font-size:16px;line-height:1.62}
+.duebar{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.due{background:#fff;color:#0a0a0c;border-radius:999px;padding:10px 20px;font-weight:800;font-size:13.5px;letter-spacing:.04em}
+.pill{border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:13px;color:var(--dim);font-weight:500}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.82);backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:11px;padding-bottom:11px;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{font-size:12.5px;color:var(--dim);text-decoration:none;padding:7px 13px;border-radius:8px;white-space:nowrap;font-weight:600}
+nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+
+section{padding:66px 0;border-bottom:1px solid var(--line)}
+h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:8px}
+.h2sub{font-size:26px;font-weight:700;letter-spacing:-.015em;margin-bottom:26px}
+.h2sub.small{font-size:21px}
+
+/* ---------- owners ---------- */
+.owners{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px}
+.owner{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.owner:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.owner h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.owner .role{color:var(--c);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:6px}
+.owner ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.owner li{font-size:13.5px;color:var(--dim);padding-left:16px;position:relative;line-height:1.5}
+.owner li:before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--c);opacity:.8}
+
+/* ---------- timeline ---------- */
+.tl{display:flex;flex-direction:column;gap:14px}
+.beat{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.beat summary{list-style:none;cursor:pointer;padding:20px 24px;display:grid;grid-template-columns:52px 1fr auto;gap:18px;align-items:center}
+.beat summary::-webkit-details-marker{display:none}
+.beat summary:hover{background:rgba(255,255,255,.02)}
+.num{font-size:12px;font-weight:800;color:var(--faint);letter-spacing:.06em}
+.bt{font-size:17.5px;font-weight:700;letter-spacing:-.01em}
+.bmeta{font-size:12.5px;color:var(--faint);margin-top:3px;font-weight:500}
+.who{font-size:10.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid;white-space:nowrap}
+.body{padding:0 24px 24px 94px;display:flex;flex-direction:column;gap:20px}
+@media(max-width:680px){.body{padding-left:24px}.beat summary{grid-template-columns:40px 1fr;gap:12px}.who{grid-column:2;justify-self:start;margin-top:8px}}
+.blk .lbl{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:9px}
+.vo{border-left:2px solid rgba(255,255,255,.2);padding-left:15px;display:flex;flex-direction:column;gap:5px}
+.vo p{font-size:15px;color:#e8e8ee;font-style:italic}
+.quote{background:rgba(255,255,255,.035);border-radius:10px;padding:15px 17px;display:flex;flex-direction:column;gap:11px}
+.quote p{font-size:14px;color:#d8d8e0;line-height:1.6}
+.quote p:before{content:"“";color:var(--faint);margin-right:2px}
+.quote p:after{content:"”";color:var(--faint);margin-left:2px}
+.now{font-size:14px;color:var(--dim);line-height:1.6}
+ul.todo{list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.todo li{font-size:14px;color:#d0d0d8;padding-left:24px;position:relative;line-height:1.55}
+ul.todo li:before{content:"";position:absolute;left:0;top:3px;width:13px;height:13px;border:1.5px solid rgba(255,255,255,.3);border-radius:3.5px}
+.assets{display:flex;flex-direction:column;gap:7px}
+.asset{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--dim);line-height:1.5}
+.tagk{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:5px;white-space:nowrap;margin-top:1px}
+.k-built{background:rgba(158,232,168,.14);color:#9ee8a8}
+.k-new{background:rgba(122,200,255,.14);color:#7ac8ff}
+.k-source{background:rgba(255,179,122,.14);color:#ffb37a}
+.flag{border-radius:10px;padding:14px 16px;font-size:13.5px;line-height:1.6;display:flex;gap:11px}
+.flag b{font-weight:800;letter-spacing:.04em}
+.f-gate{background:rgba(255,179,122,.09);border:1px solid rgba(255,179,122,.26);color:#f0d3b8}
+.f-gap{background:rgba(255,120,120,.09);border:1px solid rgba(255,120,120,.26);color:#f2c4c4}
+
+/* ---------- packs ---------- */
+.packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.pack{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.pack video{width:100%;aspect-ratio:16/9;display:block;background:#000;cursor:pointer}
+.pack .pm{padding:15px 17px 17px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pack .pr{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pack h4{font-size:16px;font-weight:700}
+.pack .dur{font-size:11.5px;color:var(--faint);font-weight:600}
+.pack p{font-size:13px;color:var(--dim);line-height:1.55;flex:1}
+.ptags{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.ptag{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:4px 10px}
+
+/* ---------- generic cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h4{font-size:16.5px;font-weight:700;margin-bottom:11px}
+.card p,.card li{font-size:13.5px;color:var(--dim);line-height:1.62}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:9px}
+.card li{padding-left:15px;position:relative}
+.card li:before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--faint)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:5px;color:#cfe6ff}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--dim);line-height:1.75;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:10px;padding:15px 17px;overflow-x:auto;white-space:pre}
+footer{padding:52px 0 74px;color:var(--faint);font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Benchmark Golf · Keynote</div>
+  <h1>Production Brief <span class="lt">for Cedrick, Luigi &amp; Mae</span></h1>
+  <p class="lede">Everything from Paul's three review videos, mapped beat by beat onto the current cut —
+     what's there now, what he wants, who owns it, and which motion graphics are already built and waiting.
+     The current cut runs <strong style="color:#fff">2:51.8</strong> plus the cold open.</p>
+  <div class="duebar">
+    <span class="due">DUE MONDAY EVENING</span>
+    <span class="pill">Current cut · 2:51.8</span>
+    <span class="pill">13 sections</span>
+    <span class="pill">Delivery · 4K</span>
+  </div>
+</div></header>
+
+<nav><div class="wrap">
+  <a href="#owners">Who does what</a>
+  <a href="#timeline">The timeline</a>
+  <a href="#packs">Motion graphics</a>
+  <a href="#stage">Stage cleanup</a>
+  <a href="#colour">Colour</a>
+  <a href="#sound">Sound</a>
+  <a href="#delivery">Delivery</a>
+  <a href="#flags">Flags</a>
+</div></nav>
+
+<section id="owners"><div class="wrap">
+  <h2>Ownership</h2>
+  <div class="h2sub">Three lanes, one sequence</div>
+  <div class="owners">
+    <div class="owner" style="--c:var(--ced)">
+      <h3>Cedrick</h3><div class="role">Sequence lead · Sound</div>
+      <ul>
+        <li><strong>Owns the sequence.</strong> Everything lands in his timeline.</li>
+        <li>Builds the cold open — currently 11s, needs 15–20s.</li>
+        <li>The two epic moments: the expansion at 0:30 and the close at 2:46.</li>
+        <li>Sound design for the whole film.</li>
+        <li>Drives the 4K conform.</li>
+      </ul>
+    </div>
+    <div class="owner" style="--c:var(--lui)">
+      <h3>Luigi</h3><div class="role">BMP · Range · Atlas</div>
+      <ul>
+        <li>Range section — has an edit, needs the real B-roll cut in.</li>
+        <li>Atlas section — has an edit, follow Paul's scan → read → rebuild order.</li>
+        <li>The BMP model, including body → 3D pose.</li>
+        <li>The "30 courses" setup into Atlas.</li>
+      </ul>
+    </div>
+    <div class="owner" style="--c:var(--mae)">
+      <h3>Mae</h3><div class="role">On Course · Lessons · Social</div>
+      <ul>
+        <li>On Course and the smart caddy.</li>
+        <li>Lessons — insights and shot recommendations.</li>
+        <li>Social — including the over-the-shoulder phone clip Paul named.</li>
+        <li>Generates B-roll to lay over her sections.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h4>Working rhythm</h4>
+    <p>Paul's ask: <em>"I want them to continuously sync on how this is going to all fit together."</em>
+       Luigi and Mae build sections; Cedrick assembles. Sync often enough that the seams are decided
+       before Monday evening, not discovered at the end.</p>
+  </div>
+</div></section>
+
+<section id="timeline"><div class="wrap">
+  <h2>The timeline</h2>
+  <div class="h2sub">Every beat of the current cut, with Paul's notes</div>
+  <div class="tl" id="tl"></div>
+</div></section>
+
+<section id="packs"><div class="wrap">
+  <h2>Motion graphics</h2>
+  <div class="h2sub">Built and ready to cut with</div>
+  <p class="lede" style="margin-bottom:26px">
+    All of these were generated with AI tooling and render from code, which means anything here can be
+    re-timed, re-worded or re-coloured on request — the product name, the numbers and the durations are
+    variables, not baked pixels. Every one also exports as a <strong style="color:#fff">ProRes 4444 alpha overlay at 4K</strong>,
+    so it drops straight onto V2 in Premiere over a cut. Hover any card to play.
+  </p>
+  <div class="packs" id="packs"></div>
+  <div class="card" style="margin-top:22px">
+    <h4>How they were made — and why that matters for you</h4>
+    <p>These aren't stock transition packs. Each one is a small program: the Benchmark wordmark is real
+       vector geometry, the motion is a timeline, and the look is generated at render time. Practically:</p>
+    <ul>
+      <li><strong>Nothing is locked.</strong> Wrong length? Wrong word under the lockup? Say so and it re-renders.</li>
+      <li><strong>The letterforms are the transition.</strong> The b's bowl is a real mask — footage plays inside it.</li>
+      <li><strong>Alpha is genuine.</strong> Transparent lead and tail, fully opaque through the middle — that opaque stretch is where you hide the cut.</li>
+      <li><strong>Consistent by construction.</strong> Same easing, same brand rules, same dark, across all of them.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="stage"><div class="wrap">
+  <h2>Stage cleanup</h2>
+  <div class="h2sub">AI renders + a post overlay for the wall shots</div>
+  <div class="cards">
+    <div class="card">
+      <h4>What's wrong with the stage frames</h4>
+      <p>Measured off a graded still, not eyeballed:</p>
+      <ul>
+        <li>The top-right corner is dead — mean 21/255, max 29. No falloff, just crushed noise.</li>
+        <li>The right side of frame is <strong>30% darker</strong> than the left, on both wall and floor.</li>
+        <li>Metal base plates, mounting feet and bright bolt glints run the full width along the bottom of the LED wall (glints peak at 207 against a wall of ~25).</li>
+        <li>A hanging fixture and rigging are visible top-left; the room is visible past both wall edges.</li>
+        <li><strong>13 clusters of stuck red pixels</strong> on the wall itself.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Five AI look-dev treatments</h4>
+      <p>Rendered from the real frame so you can see the target rather than guess at it. The recommendation
+         combines haze, one low floor rake light, and two vertical tube lights standing in the dead corners —
+         all of it achievable in camera.</p>
+      <ul>
+        <li>A — haze + clean falloff</li>
+        <li>B — floor rake light (wall reads as a floating panel)</li>
+        <li>C — black flats closing the sides</li>
+        <li>D — practical tube lights in the corners</li>
+        <li><strong>E — B + D combined ← recommended</strong></li>
+      </ul>
+      <p style="margin-top:11px">In <code>05-footage/STAGE-LOOKDEV/</code> with full measurements.</p>
+    </div>
+    <div class="card">
+      <h4>Owner: to be assigned</h4>
+      <p>Paul flagged that someone should own the AI renders / scene cleanup. It isn't allocated yet —
+         it needs a name before Monday.</p>
+      <p style="margin-top:11px">Because the camera is locked off, the post fix needs <strong>no roto and no tracking</strong>:
+         one overlay pair works across every stage shot. A <code>stage-dress</code> kit exists that buries the
+         wall base, shapes the corners and rebalances left-to-right.</p>
+      <div class="flag f-gate" style="margin-top:13px"><b>NOTE</b>
+        <span>The overlay is ~90% there. It currently lays a visible hard-edged band at the wall/floor
+        junction and the light-strip variant renders boxy. Use the look-dev renders as direction;
+        treat the overlay as a work in progress.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="colour"><div class="wrap">
+  <h2>Colour</h2>
+  <div class="h2sub">One grade across everything</div>
+  <div class="cards">
+    <div class="card">
+      <h4>The problem</h4>
+      <p>The course footage is flat log-profile. Ungraded it reads milky and desaturated, and it will not
+         cut against the stage material, which is near-black with a bright LED wall. Two very different
+         worlds that have to feel like one film.</p>
+    </div>
+    <div class="card">
+      <h4>The look</h4>
+      <ul>
+        <li>Lifted-toe S-curve — crush gently, roll the highlights, never clip the sky.</li>
+        <li>Saturation restored to ~1.35 after the curve, not before.</li>
+        <li>Warm highlights, cool shadows — a small split, nothing tropical.</li>
+        <li>Gentle vignette so the eye stays centre-frame.</li>
+        <li>Stage shots stay dark and mono. Do not lift the blacks to match the course.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Reference recipe</h4>
+      <p>The 14 graded B-roll clips in the motion-graphics assets were all built with this. Match to them
+         and the film holds together:</p>
+      <div class="mono">curve:  0 → 0.2/0.12 → 0.5/0.5
+        → 0.85/0.9 → 1
+sat:    1.35
+contrast: 1.16
+warm highs / cool shadows
+vignette: subtle</div>
+      <p style="margin-top:11px">App UI keeps its own real colours — green swing plane, amber flag, blue selection.
+         Never re-grade the product UI to match the film.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="sound"><div class="wrap">
+  <h2>Sound</h2>
+  <div class="h2sub">Cedrick owns this end to end</div>
+  <div class="cards">
+    <div class="card">
+      <h4>Paul's direction</h4>
+      <div class="quote">
+        <p>Throughout the entire video we can play off of somewhat ambient music at certain moments.</p>
+        <p>I don't want cringy hype.</p>
+        <p>Within each vignette maybe there's specific sound design that exists there as well. It can be its own little vibe.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h4>The transition grammar, measured</h4>
+      <p>Taken off the Whoop keynote spectrally, so it's numbers rather than vibes:</p>
+      <ul>
+        <li>Highs close ~50ms <em>before</em> the cut — reads as suction, not as an edit.</li>
+        <li>The mix ducks ~15dB while the sub keeps falling 30–37dB. A vacuum, not a gate.</li>
+        <li>A flat ~300Hz drone survives the hole so it never sounds like dropout.</li>
+        <li>The gap is exactly one beat. Impact lands on the downbeat.</li>
+        <li>Impacts stagger: air/click first, sub bloom ~100ms later.</li>
+        <li>The new section runs 5–10dB hotter — the transition is a level step-up.</li>
+      </ul>
+      <p style="margin-top:11px">Full cue sheets per transition in <code>SOUND-DESIGN.md</code>.</p>
+    </div>
+    <div class="card">
+      <h4>Practical note</h4>
+      <p>Each section can carry its own sonic identity — the range breathes differently from Atlas, which
+         breathes differently from the close. The through-line is the music bed and the transition grammar;
+         the texture inside each vignette can change.</p>
+      <p style="margin-top:11px">The transition graphics were built with long enough cover moments to slide
+         a few frames either way, so impacts can be moved onto the beat grid without breaking the visuals.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="delivery"><div class="wrap">
+  <h2>Delivery</h2>
+  <div class="h2sub">What Monday evening means</div>
+  <div class="cards">
+    <div class="card">
+      <h4>Format</h4>
+      <ul>
+        <li><strong>4K throughout.</strong> Paul: "we need to turn this into the 4K version — all these shots should be in 4K."</li>
+        <li>Every motion graphic already renders at 3840×2160.</li>
+        <li>Alpha overlays are ProRes 4444 with real transparency.</li>
+        <li>Conform at 4K rather than upscaling a 1080 sequence.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Order of work</h4>
+      <ul>
+        <li>Cold open first — it sets the tone and it's Cedrick's gate to the rest.</li>
+        <li>Luigi and Mae build sections in parallel against the VO spine.</li>
+        <li>Sync on the seams as you go, not at the end.</li>
+        <li>Sound after picture locks per section, not at the very end.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Where the assets live</h4>
+      <div class="mono">02-animations/Benchmark Transitions/
+  preview-mp4/     watchable
+  alpha-prores/    4K overlays
+  templates/       sources
+  assets/broll/    graded B-roll
+  assets/appref/   real app UI
+
+05-footage/STAGE-LOOKDEV/
+  look-dev renders + notes</div>
+    </div>
+  </div>
+</div></section>
+
+<section id="flags"><div class="wrap">
+  <h2>Flags</h2>
+  <div class="h2sub">Things that can stop this shipping</div>
+  <div class="cards">
+    <div class="card">
+      <h4 style="color:#ff9d9d">Claims — unresolved</h4>
+      <p>These are spoken in the current VO and are not yet signed off. They are the only things that can
+         genuinely block publication:</p>
+      <ul>
+        <li><strong>"Scan every course in the world"</strong> — Atlas was US-only as of Jul 27. Highest exposure in the film.</li>
+        <li><strong>"Millimeter precision"</strong> — the guidelines claim accuracy leadership, not millimetres.</li>
+        <li>"Almost a million homes on every continent" and "fastest growing consumer golf product" — unconfirmed superlatives.</li>
+        <li>"Tens of millions of swings analyzed every month" — the stat graphic keeps this as a variable until confirmed.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color:#ff9d9d">Missing footage</h4>
+      <ul>
+        <li><strong>No living-room / at-home footage exists</strong> anywhere in the project. The VO names it twice. This has to be shot or sourced.</li>
+        <li><strong>No physical range B-roll</strong> is on the machine — Paul is re-downloading it.</li>
+        <li>The over-the-shoulder social phone clip needs to be located.</li>
+        <li>Varied user content for the success beat — Paul named the Eddie couple shoot as the right flavour.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color:#ffcf9d">Standing orders</h4>
+      <ul>
+        <li>The caddy claims <strong>body and shape only</strong> — never a carry distance or "how far you hit it."</li>
+        <li>Atlas visuals stay on North America. No worldwide course markers.</li>
+        <li>Any depicted golf hole is a <strong>generic composite</strong>, never a real named course.</li>
+        <li>Brand chrome is mono white on #0A0A0C. Real app UI keeps its real colours.</li>
+        <li>No Golf Daddy mention anywhere.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Built from Paul's three review videos (Epic Launch Script · Motion Graphics Review · Keynote Handoff),
+     the current cut, and the Golf at Home app recordings.<br>
+     VO timings measured off BENCHMARK-KEYNOTE-HANDOFF.mp4. Paul's notes are transcribed verbatim.</p>
+</div></footer>
+
+<script src="data.js"></script>
+<script>
+const O = window.OWNERS, cvar = {cedrick:'var(--ced)',luigi:'var(--lui)',mae:'var(--mae)',all:'var(--dim)'};
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
+  const c = cvar[s.owner] || 'var(--dim)';
+  const blk = (lbl, inner) => `<div class="blk"><div class="lbl">${lbl}</div>${inner}</div>`;
+  let b = '';
+  if (s.vo)   b += blk('Voice over', `<div class="vo">${s.vo.map(v=>`<p>${esc(v)}</p>`).join('')}</div>`);
+  if (s.paul) b += blk("Paul's notes", `<div class="quote">${s.paul.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`);
+  if (s.now)  b += blk('Where it is now', `<div class="now">${esc(s.now)}</div>`);
+  if (s.todo) b += blk('To do', `<ul class="todo">${s.todo.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`);
+  if (s.assets) b += blk('Assets ready', `<div class="assets">${s.assets.map(a=>
+      `<div class="asset"><span class="tagk k-${a.kind}">${a.kind==='new'?'new tonight':a.kind}</span><span>${esc(a.label)}</span></div>`).join('')}</div>`);
+  if (s.gap)  b += `<div class="flag f-gap"><b>BLOCKER</b><span>${esc(s.gap)}</span></div>`;
+  if (s.gate) b += `<div class="flag f-gate"><b>CLAIM</b><span>${esc(s.gate)}</span></div>`;
+  return `<details class="beat"${i<3?' open':''}>
+    <summary>
+      <div class="num">${s.n}</div>
+      <div><div class="bt">${esc(s.title)}</div><div class="bmeta">${esc(s.range)}</div></div>
+      <div class="who" style="color:${c};border-color:${c}">${esc(O[s.owner].name)}</div>
+    </summary>
+    <div class="body">${b}</div>
+  </details>`;
+}).join('');
+
+document.getElementById('packs').innerHTML = window.PACKS.map(p => {
+  const c = cvar[p.who] || 'var(--dim)';
+  const who = p.who==='all' ? 'Everyone' : O[p.who].name;
+  return `<div class="pack">
+    <video src="assets/${p.id}.mp4" muted loop playsinline preload="metadata"
+      onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+      onclick="this.paused?this.play():this.pause()"></video>
+    <div class="pm">
+      <div class="pr"><h4>${esc(p.name)}</h4><span class="dur">${esc(p.dur)}</span></div>
+      <p>${esc(p.use)}</p>
+      <div class="ptags"><span class="ptag">${esc(p.tag)}</span><span class="ptag" style="color:${c};border-color:${c}">${esc(who)}</span></div>
+    </div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
