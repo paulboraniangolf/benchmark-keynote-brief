@@ -75,7 +75,7 @@ h2{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--fain
 @media(max-width:680px){.scrubstrip .cap{display:none}.scrubstrip img{height:56px}}
 
 /* ---------- loom clips ---------- */
-.looms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.looms{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px;max-width:820px}
 .loom{background:rgba(122,200,255,.05);border:1px solid rgba(122,200,255,.2);border-radius:11px;overflow:hidden}
 .loom video{width:100%;aspect-ratio:16/9;display:block;background:#000;cursor:pointer}
 .loom .lm{padding:9px 12px 11px;display:flex;align-items:center;gap:8px}
@@ -492,7 +492,7 @@ document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
   if (s.thumb) b += blk('In the cut right now', `<div class="thumbwrap"><img src="assets/tl/${s.thumb}.jpg" alt="Frame from ${esc(s.title)}" loading="lazy"><span class="tnote">Frame from the current cut · brightened for legibility</span></div>`);
   if (s.vo)   b += blk('Voice over', `<div class="vo">${s.vo.map(v=>`<p>${esc(v)}</p>`).join('')}</div>`);
   if (s.looms) b += blk('Paul saying it — from the Loom', `<div class="looms">${s.looms.map(l=>
-      `<div class="loom"><video src="assets/loom/${l.id}.mp4" controls preload="none" playsinline></video>
+      `<div class="loom"><video src="assets/loom/${l.id}.mp4" poster="assets/loom/p/${l.id}.jpg" controls preload="none" playsinline></video>
        <div class="lm"><span class="dot"></span><span>${esc(l.src)}</span></div></div>`).join('')}</div>`);
   if (s.paul) b += blk("Transcribed", `<div class="quote">${s.paul.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`);
   if (s.now)  b += blk('Where it is now', `<div class="now">${esc(s.now)}</div>`);
@@ -512,7 +512,7 @@ document.getElementById('tl').innerHTML = window.SECTIONS.map((s,i) => {
 }).join('');
 
 document.getElementById('extraLooms').innerHTML = window.EXTRA_LOOMS.map(l =>
-  `<div class="loom"><video src="assets/loom/${l.id}.mp4" controls preload="none" playsinline></video>
+  `<div class="loom"><video src="assets/loom/${l.id}.mp4" poster="assets/loom/p/${l.id}.jpg" controls preload="none" playsinline></video>
    <div class="lm"><span class="dot"></span><span>${esc(l.title)} · ${esc(l.src)}</span></div></div>`).join('');
 
 document.getElementById('packGrid').innerHTML = window.PACKS.map(p => {
