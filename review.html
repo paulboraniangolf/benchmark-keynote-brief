@@ -153,7 +153,7 @@ const BLOB="https://jsonblob.com/api/jsonBlob/019fca23-8a57-713b-840e-e4690aa664
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cvar={cedrick:'var(--ced)',luigi:'var(--lui)',mae:'var(--mae)'};
 const CHECK='<svg viewBox="0 0 12 12" fill="none"><path d="M2 6.2l2.6 2.6L10 3.4" stroke="#0a0a0c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const fmt=t=>Math.floor(t/60)+':'+String(Math.round(t%60)).padStart(2,'0');
+const fmt=t=>t<0?'pre':Math.floor(t/60)+':'+String(Math.round(t%60)).padStart(2,'0');
 
 // section order + spans along the cut
 const SPANS=[
@@ -236,7 +236,7 @@ function render(){
     const R=20, C=2*Math.PI*R, off=C*(1-(list.length?d/list.length:0));
     return `<div class="sec" id="s-${s.id}" style="--c:${c}">
       <div class="rail">
-        <span class="tc">${s.t<999?fmt(s.t):'—'}</span>
+        <span class="tc">${s.t<0?'pre-roll':s.t<999?fmt(s.t):'—'}</span>
         <div class="ringw"><svg class="ring" viewBox="0 0 46 46">
           <circle class="bgc" cx="23" cy="23" r="${R}"></circle>
           <circle class="fgc" cx="23" cy="23" r="${R}" stroke-dasharray="${C}" stroke-dashoffset="${off}"></circle>
