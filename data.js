@@ -283,6 +283,7 @@ window.SECTIONS = [
 ];
 
 window.PACKS = [
+  { id: "bmp-model", name: "Benchmark Motion — model benchmark", dur: "14.0s", use: "The BMP comparison from benchmarkmotion.com, rebuilt as motion. Accuracy (28.4mm vs 35.9 / 41.7 / 44.5) then flips to real-time speed (72fps vs 11 / 27 / 20). Winning bar carries the site's flowing spectrum. No version number anywhere, per Paul. Renders as accuracy-only or speed-only via the mode variable.", who: "luigi", tag: "New" },
   { id: "stat-swings", name: "Swings Analyzed", dur: "7.0s", use: "The full-screen liquid-glass stat moment Paul asked for at 0:13. The number counts up and settles, satellite chips arrive, swing-trace arcs drift behind the glass. The figure is a variable — it changes the moment the real number is confirmed.", who: "cedrick", tag: "New tonight" },
   { id: "bmp-swing", name: "BMP Swing", dur: "9.0s", use: "Rebuilt against the REAL app overlay — green swing plane, red/amber heat column, amber club-path arc, red→yellow→green reticle — then his body resolves into a 3D pose skeleton. This replaces the version Paul called inaccurate.", who: "luigi", tag: "New tonight" },
   { id: "roll-call", name: "Roll Call", dur: "6.5s", use: "Range, On Course, At Home, Lessons arriving one at a time in rhythm with the four spoken phrases, then holding together before the lockup. Use at 0:20 and again at 1:07.", who: "luigi", tag: "New tonight" },
