@@ -59,6 +59,11 @@ section.sec{margin-top:26px}
 .box svg{width:11px;height:11px;opacity:0;transform:scale(.6);transition:all .18s}
 .item.done .box{background:var(--ok);border-color:var(--ok)}
 .item.done .box svg{opacity:1;transform:scale(1)}
+.tcrow{display:flex;gap:9px;align-items:baseline;margin-bottom:5px;flex-wrap:wrap}
+.tcb{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;color:#cfe6ff;
+  background:rgba(122,200,255,.12);border:1px solid rgba(122,200,255,.25);border-radius:5px;padding:2px 7px;flex:none}
+.vol{font-size:12px;color:var(--faint);font-style:italic;line-height:1.35}
+.item.done .vol,.item.done .tcb{opacity:.45}
 .itxt{font-size:14px;color:#dcdce4;line-height:1.55}
 .item.done .itxt{color:var(--faint);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.22)}
 .meta{font-size:11px;color:var(--faint);margin-top:5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -113,19 +118,18 @@ footer{padding:40px 0 60px;color:var(--faint);font-size:12px;line-height:1.7}
 </div></footer>
 
 <script src="data.js"></script>
+<script src="tasks.js"></script>
 <script>
 const BLOB = "https://jsonblob.com/api/jsonBlob/019fca23-8a57-713b-840e-e4690aa66442";
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cvar = {cedrick:'var(--ced)',luigi:'var(--lui)',mae:'var(--mae)'};
 const CHECK = '<svg viewBox="0 0 12 12" fill="none"><path d="M2 6.2l2.6 2.6L10 3.4" stroke="#0a0a0c" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-// ---- build the task list out of the brief ----
-const TASKS = [];
-window.SECTIONS.forEach(s => {
-  (s.todo || []).forEach((t, i) => TASKS.push({ id: s.id + ':t' + i, sec: s, text: t, kind: 'todo' }));
-  if (s.gap)  TASKS.push({ id: s.id + ':gap',  sec: s, text: s.gap,  kind: 'blocker' });
-  if (s.gate) TASKS.push({ id: s.id + ':gate', sec: s, text: s.gate, kind: 'gate' });
-});
+// ---- timecode-anchored task list ----
+const SECMETA = {};
+window.SECTIONS.forEach(x => SECMETA[x.id] = { n: x.n, title: x.title, owner: x.owner });
+Object.assign(SECMETA, window.TASK_SECTIONS);
+const TASKS = window.TASKS.map((t, i) => ({ ...t, id: t.sec + ':' + i, meta: SECMETA[t.sec] }));
 
 let state = { items: {}, updatedAt: 0, updatedBy: '' };
 let filter = 'all';
@@ -143,11 +147,11 @@ function setStatus(kind, text) {
 
 function render() {
   const secs = {};
-  TASKS.forEach(t => { (secs[t.sec.id] = secs[t.sec.id] || { s: t.sec, list: [] }).list.push(t); });
+  TASKS.forEach(t => { (secs[t.sec] = secs[t.sec] || { s: t.meta, list: [] }).list.push(t); });
 
   document.getElementById('list').innerHTML = Object.values(secs).map(({ s, list }) => {
     const vis = list.filter(t =>
-      (filter === 'all' || filter === 'open' ? true : s.owner === filter) &&
+      (filter === 'all' || filter === 'open' ? true : t.owner === filter) &&
       (filter === 'open' ? !state.items[t.id] : true));
     if (!vis.length) return '';
     const done = list.filter(t => state.items[t.id]).length;
@@ -162,10 +166,14 @@ function render() {
       <div class="items">${vis.map(t => {
         const on = !!state.items[t.id];
         const by = on && state.items[t.id].by ? state.items[t.id].by : null;
-        return `<div class="item ${on ? 'done' : ''} ${t.kind === 'blocker' ? 'blocker' : t.kind === 'gate' ? 'gate' : ''}" data-id="${t.id}">
+        const isBlock = /^BLOCKER/.test(t.text), isClaim = /^(CLAIM|STANDING ORDER)/.test(t.text);
+        return `<div class="item ${on ? 'done' : ''} ${isBlock ? 'blocker' : isClaim ? 'gate' : ''}" data-id="${t.id}">
           <div class="box">${CHECK}</div>
-          <div><div class="itxt">${t.kind === 'blocker' ? '<b style="color:#ff9d9d">BLOCKER — </b>' : t.kind === 'gate' ? '<b style="color:#ffcf9d">CLAIM — </b>' : ''}${esc(t.text)}</div>
-          ${by ? `<div class="meta">✓ ${esc(by)}</div>` : ''}</div>
+          <div style="flex:1">
+            <div class="tcrow"><span class="tcb">${esc(t.at)}</span>${t.vo ? `<span class="vol">“${esc(t.vo)}”</span>` : ''}</div>
+            <div class="itxt">${esc(t.text)}</div>
+            ${by ? `<div class="meta">✓ ${esc(by)}</div>` : ''}
+          </div>
         </div>`; }).join('')}</div>
     </section>`;
   }).join('') || '<p style="color:var(--faint);padding:30px 0">Nothing matches that filter.</p>';
@@ -174,7 +182,7 @@ function render() {
 
   // progress bars
   const per = { cedrick: [0,0], luigi: [0,0], mae: [0,0] };
-  TASKS.forEach(t => { const o = per[t.sec.owner]; if (!o) return; o[1]++; if (state.items[t.id]) o[0]++; });
+  TASKS.forEach(t => { const o = per[t.owner]; if (!o) return; o[1]++; if (state.items[t.id]) o[0]++; });
   const total = TASKS.length, doneAll = TASKS.filter(t => state.items[t.id]).length;
   document.getElementById('bars').innerHTML =
     `<div class="bar" style="--c:#fff"><div class="bh"><span class="nm">Everything</span><span class="ct">${doneAll}/${total}</span></div>
@@ -226,8 +234,9 @@ document.getElementById('reset').onclick = () => {
   state.items = {}; state.updatedAt = Date.now(); state.updatedBy = me(); dirty = true; render(); push();
 };
 
-document.getElementById('warn').textContent =
-  TASKS.length + ' items pulled straight from the brief — the to-dos, the blockers and the open claims.';
+document.getElementById('warn').innerHTML =
+  '<b>' + TASKS.length + ' items</b>, each pinned to a timecode in the current cut and the exact line it sits under. ' +
+  'Blue badge = where in the video. Italic = the VO at that moment.';
 
 render(); pull(); setInterval(pull, 4000);
 </script>
