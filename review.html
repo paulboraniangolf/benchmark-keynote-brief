@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Benchmark Keynote — Live Review Tracker</title>
+<style>
+@font-face{font-family:Manrope;src:url("assets/manrope-var.woff2") format("woff2");font-weight:200 800;font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0c;--panel:#101014;--line:rgba(255,255,255,.09);--ink:#fff;--dim:#9a9aa4;--faint:#63636d;
+  --ced:#7ac8ff;--lui:#ffb37a;--mae:#9ee8a8;--ok:#6ee7a0}
+body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+
+header{padding:34px 0 22px;border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em}
+h1 .lt{font-weight:200;color:var(--dim)}
+.sub{color:var(--dim);font-size:14px;margin-top:6px}
+.who{display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 8px 7px 16px}
+.who label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.who select{background:#1a1a20;color:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+
+.status{display:flex;gap:9px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(110,231,160,.15)}
+.dot.off{background:#ff7d7d;box-shadow:0 0 0 4px rgba(255,125,125,.15)}
+.dot.sync{background:#ffd27d;box-shadow:0 0 0 4px rgba(255,210,125,.15)}
+.stxt{font-size:12.5px;color:var(--dim)}
+
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:22px}
+.bar{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.bar .bh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.bar .nm{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--c)}
+.bar .ct{font-size:12px;color:var(--dim);font-weight:600}
+.track{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.fill{height:100%;background:var(--c);border-radius:99px;transition:width .45s cubic-bezier(.16,1,.3,1)}
+
+.toolbar{display:flex;gap:8px;margin:24px 0 4px;flex-wrap:wrap;align-items:center}
+.tb{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:8px 15px;
+  font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
+.tb:hover{color:#fff;border-color:rgba(255,255,255,.24)}
+.tb.on{background:#fff;color:#0a0a0c;border-color:#fff}
+.spacer{flex:1}
+
+section.sec{margin-top:26px}
+.sechead{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px 12px 0 0;border-bottom:none}
+.secn{font-size:11px;font-weight:800;color:var(--faint);letter-spacing:.08em}
+.sect{font-size:16px;font-weight:700;flex:1}
+.sectc{font-size:12px;color:var(--faint);font-weight:600}
+.chip{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid}
+.items{background:var(--panel);border:1px solid var(--line);border-radius:0 0 12px 12px;overflow:hidden}
+.item{display:flex;gap:13px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.055);cursor:pointer;align-items:flex-start;transition:background .15s}
+.item:first-child{border-top:none}
+.item:hover{background:rgba(255,255,255,.028)}
+.box{width:19px;height:19px;border-radius:5px;border:1.5px solid rgba(255,255,255,.28);flex:none;margin-top:1px;
+  display:grid;place-items:center;transition:all .18s}
+.box svg{width:11px;height:11px;opacity:0;transform:scale(.6);transition:all .18s}
+.item.done .box{background:var(--ok);border-color:var(--ok)}
+.item.done .box svg{opacity:1;transform:scale(1)}
+.itxt{font-size:14px;color:#dcdce4;line-height:1.55}
+.item.done .itxt{color:var(--faint);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.22)}
+.meta{font-size:11px;color:var(--faint);margin-top:5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.blocker{border-left:2px solid #ff7d7d}
+.gate{border-left:2px solid var(--lui)}
+.hidden{display:none !important}
+footer{padding:40px 0 60px;color:var(--faint);font-size:12px;line-height:1.7}
+.warn{background:rgba(255,179,122,.07);border:1px solid rgba(255,179,122,.22);border-radius:10px;padding:12px 15px;font-size:12.5px;color:#e8cfb5;margin-top:18px;line-height:1.55}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Live Review <span class="lt">Tracker</span></h1>
+      <div class="sub">Tick items as you go — everyone on this page sees it within seconds.</div>
+    </div>
+    <div class="who">
+      <label for="me">You are</label>
+      <select id="me">
+        <option value="">pick…</option>
+        <option>Paul</option><option>Cedrick</option><option>Luigi</option><option>Mae</option><option>Guest</option>
+      </select>
+    </div>
+  </div>
+  <div class="status">
+    <span class="dot" id="dot"></span><span class="stxt" id="stxt">connecting…</span>
+    <span class="stxt" style="color:var(--faint)">·</span>
+    <a class="stxt" href="./" style="text-decoration:underline">full brief</a>
+  </div>
+  <div class="bars" id="bars"></div>
+</div></header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <button class="tb on" data-f="all">All</button>
+    <button class="tb" data-f="cedrick">Cedrick</button>
+    <button class="tb" data-f="luigi">Luigi</button>
+    <button class="tb" data-f="mae">Mae</button>
+    <button class="tb" data-f="open">Open only</button>
+    <span class="spacer"></span>
+    <button class="tb" id="reset">Reset all</button>
+  </div>
+  <div id="list"></div>
+  <div class="warn" id="warn"></div>
+</div>
+
+<footer><div class="wrap">
+  <p>State is shared through a public JSON store, polled every 4 seconds. It is a scratchpad for this
+     review, not a system of record — copy anything you want to keep.</p>
+</div></footer>
+
+<script src="data.js"></script>
+<script>
+const BLOB = "https://jsonblob.com/api/jsonBlob/019fca23-8a57-713b-840e-e4690aa66442";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cvar = {cedrick:'var(--ced)',luigi:'var(--lui)',mae:'var(--mae)'};
+const CHECK = '<svg viewBox="0 0 12 12" fill="none"><path d="M2 6.2l2.6 2.6L10 3.4" stroke="#0a0a0c" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+// ---- build the task list out of the brief ----
+const TASKS = [];
+window.SECTIONS.forEach(s => {
+  (s.todo || []).forEach((t, i) => TASKS.push({ id: s.id + ':t' + i, sec: s, text: t, kind: 'todo' }));
+  if (s.gap)  TASKS.push({ id: s.id + ':gap',  sec: s, text: s.gap,  kind: 'blocker' });
+  if (s.gate) TASKS.push({ id: s.id + ':gate', sec: s, text: s.gate, kind: 'gate' });
+});
+
+let state = { items: {}, updatedAt: 0, updatedBy: '' };
+let filter = 'all';
+let dirty = false;
+const me = () => document.getElementById('me').value || 'Someone';
+
+document.getElementById('me').value = localStorage.getItem('bm-me') || '';
+document.getElementById('me').onchange = e => localStorage.setItem('bm-me', e.target.value);
+
+function setStatus(kind, text) {
+  const d = document.getElementById('dot');
+  d.className = 'dot' + (kind === 'off' ? ' off' : kind === 'sync' ? ' sync' : '');
+  document.getElementById('stxt').textContent = text;
+}
+
+function render() {
+  const secs = {};
+  TASKS.forEach(t => { (secs[t.sec.id] = secs[t.sec.id] || { s: t.sec, list: [] }).list.push(t); });
+
+  document.getElementById('list').innerHTML = Object.values(secs).map(({ s, list }) => {
+    const vis = list.filter(t =>
+      (filter === 'all' || filter === 'open' ? true : s.owner === filter) &&
+      (filter === 'open' ? !state.items[t.id] : true));
+    if (!vis.length) return '';
+    const done = list.filter(t => state.items[t.id]).length;
+    const c = cvar[s.owner] || 'var(--dim)';
+    return `<section class="sec">
+      <div class="sechead">
+        <span class="secn">${esc(s.n)}</span>
+        <span class="sect">${esc(s.title)}</span>
+        <span class="sectc">${done}/${list.length}</span>
+        <span class="chip" style="color:${c};border-color:${c}">${esc(window.OWNERS[s.owner].name)}</span>
+      </div>
+      <div class="items">${vis.map(t => {
+        const on = !!state.items[t.id];
+        const by = on && state.items[t.id].by ? state.items[t.id].by : null;
+        return `<div class="item ${on ? 'done' : ''} ${t.kind === 'blocker' ? 'blocker' : t.kind === 'gate' ? 'gate' : ''}" data-id="${t.id}">
+          <div class="box">${CHECK}</div>
+          <div><div class="itxt">${t.kind === 'blocker' ? '<b style="color:#ff9d9d">BLOCKER — </b>' : t.kind === 'gate' ? '<b style="color:#ffcf9d">CLAIM — </b>' : ''}${esc(t.text)}</div>
+          ${by ? `<div class="meta">✓ ${esc(by)}</div>` : ''}</div>
+        </div>`; }).join('')}</div>
+    </section>`;
+  }).join('') || '<p style="color:var(--faint);padding:30px 0">Nothing matches that filter.</p>';
+
+  document.querySelectorAll('.item').forEach(el => el.onclick = () => toggle(el.dataset.id));
+
+  // progress bars
+  const per = { cedrick: [0,0], luigi: [0,0], mae: [0,0] };
+  TASKS.forEach(t => { const o = per[t.sec.owner]; if (!o) return; o[1]++; if (state.items[t.id]) o[0]++; });
+  const total = TASKS.length, doneAll = TASKS.filter(t => state.items[t.id]).length;
+  document.getElementById('bars').innerHTML =
+    `<div class="bar" style="--c:#fff"><div class="bh"><span class="nm">Everything</span><span class="ct">${doneAll}/${total}</span></div>
+      <div class="track"><div class="fill" style="width:${total?doneAll/total*100:0}%"></div></div></div>` +
+    Object.entries(per).map(([k, [d, n]]) =>
+    `<div class="bar" style="--c:${cvar[k]}"><div class="bh"><span class="nm">${window.OWNERS[k].name}</span><span class="ct">${d}/${n}</span></div>
+      <div class="track"><div class="fill" style="width:${n?d/n*100:0}%"></div></div></div>`).join('');
+}
+
+function toggle(id) {
+  if (state.items[id]) delete state.items[id];
+  else state.items[id] = { by: me(), at: Date.now() };
+  state.updatedAt = Date.now(); state.updatedBy = me();
+  dirty = true; render(); push();
+}
+
+let pushing = false;
+async function push() {
+  if (pushing) return; pushing = true;
+  setStatus('sync', 'saving…');
+  try {
+    await fetch(BLOB, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state) });
+    dirty = false; setStatus('ok', 'saved · shared with everyone on this page');
+  } catch (e) { setStatus('off', 'offline — your ticks are local until it reconnects'); }
+  pushing = false;
+}
+
+async function pull() {
+  if (dirty || pushing) return;
+  try {
+    const r = await fetch(BLOB + '?t=' + Date.now(), { cache: 'no-store' });
+    const j = await r.json();
+    if (j && typeof j === 'object' && (j.updatedAt || 0) !== (state.updatedAt || 0)) {
+      state = { items: j.items || {}, updatedAt: j.updatedAt || 0, updatedBy: j.updatedBy || '' };
+      render();
+      setStatus('ok', state.updatedBy ? `updated by ${state.updatedBy}` : 'in sync');
+    } else if (!dirty) {
+      setStatus('ok', 'in sync');
+    }
+  } catch (e) { setStatus('off', 'offline — retrying'); }
+}
+
+document.querySelectorAll('.tb[data-f]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tb[data-f]').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); filter = b.dataset.f; render();
+});
+document.getElementById('reset').onclick = () => {
+  if (!confirm('Clear every tick for everyone?')) return;
+  state.items = {}; state.updatedAt = Date.now(); state.updatedBy = me(); dirty = true; render(); push();
+};
+
+document.getElementById('warn').textContent =
+  TASKS.length + ' items pulled straight from the brief — the to-dos, the blockers and the open claims.';
+
+render(); pull(); setInterval(pull, 4000);
+</script>
+</body>
+</html>
