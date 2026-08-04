@@ -142,7 +142,7 @@ footer{padding:36px 0 60px;color:var(--faint);font-size:12px;line-height:1.7}
 <div class="wrap" style="padding-top:22px"><div id="list"></div></div>
 
 <footer><div class="wrap">
-  <p>Live shared board — ticks, notes and added tasks sync to everyone within about 4 seconds.
+  <p>Live shared board — ticks, notes and added tasks sync to everyone within about 10 seconds.
      A scratchpad for this review, not a system of record. <a href="./" style="color:var(--dim)">Full brief →</a></p>
 </div></footer>
 
@@ -336,17 +336,27 @@ async function push(){
   if(pushing)return; pushing=true; setStatus('sync','saving…');
   try{await fetch(BLOB,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(state)});
     dirty=false; setStatus('ok','saved · everyone sees this');}
-  catch(e){setStatus('off','offline — changes are local');}
+  catch(e){setStatus('off','not saved yet — retrying');setTimeout(()=>{dirty=true;push();},3000);}
   pushing=false;
+}
+let backoff=0;
+function validPayload(j){
+  // must look like our board, or we ignore it entirely (rate-limit bodies, HTML error pages, etc.)
+  return j && typeof j==='object' && !j.error && typeof j.items==='object' && j.items!==null;
 }
 async function pull(){
   if(dirty||pushing||openComposer)return;
-  try{const j=await (await fetch(BLOB+'?t='+Date.now(),{cache:'no-store'})).json();
-    if(j&&(j.updatedAt||0)!==(state.updatedAt||0)){
+  if(backoff>0){backoff--;return;}
+  try{
+    const r=await fetch(BLOB+'?t='+Date.now(),{cache:'no-store'});
+    if(r.status===429){backoff=4;setStatus('sync','busy — slowing down');return;}
+    const j=await r.json();
+    if(!validPayload(j)){backoff=3;setStatus('sync','busy — your work is safe');return;}
+    if((j.updatedAt||0)!==(state.updatedAt||0)){
       state={items:j.items||{},notes:j.notes||{},custom:j.custom||{},updatedAt:j.updatedAt||0,updatedBy:j.updatedBy||''};
       render(); setStatus('ok',state.updatedBy?('updated by '+state.updatedBy):'in sync');
     }else setStatus('ok','in sync');
-  }catch(e){setStatus('off','offline — retrying');}
+  }catch(e){backoff=2;setStatus('off','offline — retrying, nothing lost');}
 }
 
 document.querySelectorAll('.tb[data-f]').forEach(b=>b.onclick=()=>{
@@ -356,7 +366,7 @@ document.getElementById('reset').onclick=()=>{
   if(!confirm('Clear every tick, note and added task for everyone?'))return;
   state.items={};state.notes={};state.custom={};commit();};
 
-render();pull();setInterval(pull,4000);
+render();pull();setInterval(pull,9000);
 </script>
 </body>
 </html>
